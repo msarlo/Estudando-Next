@@ -1,7 +1,24 @@
+'use client'
+
+import { useState } from 'react';
 import { faker } from '@faker-js/faker';
-import Post from '../app/components/post';
+import Post from './components/post';
+import Spinner from './components/Spinner';
 
 export default function Home() {
+  const [dados, setDados] = useState<Array<Postagem> | undefined>(undefined);
+
+  if (!dados) {
+
+    setTimeout(() => {
+      setDados(obterDados());
+    }, 2000);
+
+    return (
+      <Spinner mensagem="Carregando..." />
+    );
+  }
+
   return (
     <div className="max-w-screen-xl mx-auto p-16">
         <div className="sm:grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
